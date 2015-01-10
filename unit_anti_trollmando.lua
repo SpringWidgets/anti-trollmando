@@ -26,12 +26,21 @@ local spMarkerAddPoint     = Spring.MarkerAddPoint
 local spGetMyPlayerID      = Spring.GetMyPlayerID
 local spIsUnitVisible      = Spring.IsUnitVisible
 local spGetPlayerInfo      = Spring.GetPlayerInfo
+local spGetAllUnits        = Spring.GetAllUnits
 
 local coreCommando = UnitDefNames["commando"]
 local coreCommandoId = coreCommando.id
 
 local enemyTrollmandosList = {}
 
+local function checkSpecState()
+    local playerID = spGetMyPlayerID()
+    local _, _, spec, _, _, _, _, _ = spGetPlayerInfo(playerID)
+
+    if ( spec == true ) then
+        widgetHandler:RemoveWidget()
+    end
+end
 
 function isEnemyCommando(unitID, unitDefID)
     if unitDefID == coreCommandoId then
@@ -46,15 +55,6 @@ end
 function widget:PlayerChanged()
     checkSpecState()
     refreshCommandosInfo()
-end
-
-local function checkSpecState()
-    local playerID = spGetMyPlayerID()
-    local _, _, spec, _, _, _, _, _ = spGetPlayerInfo(playerID)
-
-    if ( spec == true ) then
-        widgetHandler:RemoveWidget()
-    end
 end
 
 
