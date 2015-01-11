@@ -77,10 +77,12 @@ function refreshCommandosInfo()
     local visibleUnits = spGetAllUnits()
     if visibleUnits ~= nil then
         for _, unitID in ipairs(visibleUnits) do
-            local udefId = GetUnitDefID(unitID)
-            if udefId ~= nil then
-                if isEnemyCommando(unitID, udefId) then
-                    enemyTrollmandosList[unitID] = true
+            if unitID ~= nil then
+                local udefId = spGetUnitDefID(unitID)
+                if udefId ~= nil then
+                    if isEnemyCommando(unitID, udefId) then
+                        enemyTrollmandosList[unitID] = true
+                    end
                 end
             end
         end
